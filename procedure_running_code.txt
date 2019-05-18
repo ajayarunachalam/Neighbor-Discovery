@@ -41,13 +41,13 @@ This will generate the following ns2 trace files :
 
 P2PNetTrace-N30-Scen3-Queries10-AODV-StdRandomWalk.cust
 P2PNetTrace-N30-Scen3-Queries10-AODV-StdFlooding.cust
- etc etc
+ etc 
 
 As well as it  will generate the following  custom trace files :
 
 P2PNetTrace-N40-Scen3-Queries10-AODV-StdFlooding.trace
 P2PNetTrace-N40-Scen2-Queries10-AODV-StdRandomWalk.trace
-etc etc
+etc 
  
 Step 3:
 
