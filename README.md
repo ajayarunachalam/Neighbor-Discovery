@@ -113,5 +113,5 @@ Compile the code as follows :
 # make install   	 
 (this is optional in the case if you already added ns-allinone-2.35/ns-2.35/ in path) 
 
-Now the new version of aodv will contain two more commands in the command section, so that you can invoke those two commands from the tcl code.
+Now the new version of aodv will contain two more commands in the command section, so that you can invoke those two commands from the tcl code. All the supporting experiment files are provided. Just follow the instructions as given in procedure_running_code.txt file to test the protocol.
 
