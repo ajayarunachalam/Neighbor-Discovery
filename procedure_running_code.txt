@@ -1,0 +1,148 @@
+Procedure for Running the code
+
+Step 1:
+
+Modify the four parameters in P2PParameters.sh   ( if necessary, as per your requirements )
+
+
+Mobility="20"				#May give a list of Different Mobilities
+PauseTime="20"				#May give a list of Different Pause Times
+SimulationRepetitions="1 2 3"	#  2 3 how many SimulationRepetitions you want to run the simulation with different network - finding average performance
+NumberOfNodes="30 40 50 60"	#  60 80 100 May give a list of Different number of Nodes
+
+And then run the script as follows :
+
+#bash  GenerateNetworkScenario.sh
+
+This will create the following scenario files 
+
+P2PNet-N60-Scen1-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N50-Scen2-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N50-Scen1-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N40-Scen3-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N40-Scen2-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N40-Scen1-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N60-Scen3-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N30-Scen3-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N60-Scen2-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N50-Scen3-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N30-Scen1-P20-M20-t100-X1000-Y1000.Scen
+P2PNet-N30-Scen2-P20-M20-t100-X1000-Y1000.Scen
+ 
+Step 2:
+
+Run the simulations as follows : (Before that, here you have to change the file name as myP2PNetworkResourceDiscoverySimulation.tcl line 37 if not changed)
+
+#bash  RunP2PNetworkSimulations.sh
+
+This will call the simulation script myP2PNetworkResourceDiscoverySimulation.tcl with different parameters and run the simulation repeatedly.
+
+This will generate the following ns2 trace files :
+
+P2PNetTrace-N30-Scen3-Queries10-AODV-StdRandomWalk.cust
+P2PNetTrace-N30-Scen3-Queries10-AODV-StdFlooding.cust
+ etc etc
+
+As well as it  will generate the following  custom trace files :
+
+P2PNetTrace-N40-Scen3-Queries10-AODV-StdFlooding.trace
+P2PNetTrace-N40-Scen2-Queries10-AODV-StdRandomWalk.trace
+etc etc
+ 
+Step 3:
+
+Run custom trace analysis as  follows :
+
+#bash P2PAnalysis-I.sh
+
+This will call the different awk scripts and do the trace analysis.
+
+This will store the results in the following tables
+
+P2P-StdRandomWalk-Analysis-I.tbl
+P2P-StdFlooding-Analysis-I.tbl
+
+Step 4:
+
+Run ns2 event trace analysis as  follows :
+
+
+#bash P2PAnalysis-II.sh
+
+
+This will call the different awk scripts and do the trace analysis.
+
+This will store the results in the following tables
+
+P2P-StdRandomWalk-Analysis-II.tbl
+P2P-StdFlooding-Analysis-II.tbl
+
+#bash  PrepareMasterTable.sh
+
+ will prepare a master table from all the analysis II tables and store it in the name
+
+MasterTable.tbl
+ 
+Step 5:
+
+Preparing xgraph version of graphs from the custom trace analysis output tables :
+
+
+#bash PrepareGraphs-I.sh
+
+
+This will prepare the graphs from the previously created .tbl files of Analysis I and plot them in separate windows
+
+(This will create lot of *.dat files and create graphs from it)
+
+Step 6:
+
+Preparing xgraph version of graphs from the ns2 event trace analysis output tables :
+
+
+#bash PrepareGraphs-II.sh
+
+
+This will prepare the graphs from the previously created .tbl files of Analysis II and plot them in separate windows
+
+(This will create lot of *.dat files and create graphs from it)
+
+
+Step 7:
+
+Preparing Gnuplot version of graphs from the custom trace analysis output tables :
+
+
+#bash PrepareGnuplotGraphs-I.sh
+
+
+This will prepare the gnuplot version of graphs from the previously created .tbl files of Analysis I and store them as .png files in the current folder 
+
+This will create the following 2 graphs
+
+P2PResourceDiscoveryProtocol-ResourceDiscoveryTime.png
+P2PResourceDiscoveryProtocol-SuccessRate.png
+
+ 
+
+Step 8:
+
+Preparing Gnuplot version of graphs from the ns2 event trace analysis output tables :
+
+
+#bash PrepareGnuplotGraphs-II.sh
+
+
+This will prepare the gnuplot version of graphs from the previously created .tbl files of Analysis II and store them as .png files in the current folder 
+
+This will create the following 8  graphs
+
+P2PResourceDiscoveryProtocol-Delay.png
+P2PResourceDiscoveryProtocol-Dropped.png
+P2PResourceDiscoveryProtocol-MACLoad.png
+P2PResourceDiscoveryProtocol-NRL.png
+P2PResourceDiscoveryProtocol-Overhead.png
+P2PResourceDiscoveryProtocol-PDF.png
+P2PResourceDiscoveryProtocol-PowerConsumption.png
+P2PResourceDiscoveryProtocol-Throughput.png
+
